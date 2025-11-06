@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Tracker - Hypnos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-header">
+                <h1>Hypnos</h1>
+            </div>
+            <div class="header-right">
+                <a href="home.html" class="back-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="profile.html" class="profile-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="content-page">
+        <div class="page-header">
+            <h2>Mood Tracker</h2>
+            <p>Track how your screen time affects your wellbeing</p>
+        </div>
+        
+        <div class="content-container">
+            <div class="mood-input-card">
+                <h3>How are you feeling today?</h3>
+                <div class="mood-selector">
+                    <button class="mood-btn" data-mood="very-happy">
+                        <div class="mood-emoji">😄</div>
+                        <span>Excellent</span>
+                    </button>
+                    <button class="mood-btn" data-mood="happy">
+                        <div class="mood-emoji">🙂</div>
+                        <span>Good</span>
+                    </button>
+                    <button class="mood-btn" data-mood="neutral">
+                        <div class="mood-emoji">😐</div>
+                        <span>Okay</span>
+                    </button>
+                    <button class="mood-btn" data-mood="sad">
+                        <div class="mood-emoji">😟</div>
+                        <span>Down</span>
+                    </button>
+                    <button class="mood-btn" data-mood="very-sad">
+                        <div class="mood-emoji">😢</div>
+                        <span>Struggling</span>
+                    </button>
+                </div>
+                <div class="mood-note-section">
+                    <textarea id="moodNote" placeholder="Add a note about your day (optional)..." rows="3"></textarea>
+                    <button class="btn btn-primary" id="saveMoodBtn">Save Today's Mood</button>
+                </div>
+            </div>
+            
+            <div class="insights-card">
+                <h3>Your Mood Insights</h3>
+                <div class="insight-item">
+                    <div class="insight-icon">💡</div>
+                    <div class="insight-content">
+                        <h4>Pattern Detected</h4>
+                        <p>You tend to feel better on days when your social media usage is under 1 hour. Your average mood on those days is 85% positive compared to 65% on high-usage days.</p>
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-icon">⚠️</div>
+                    <div class="insight-content">
+                        <h4>Consider Taking Breaks</h4>
+                        <p>Your mood has been lower this week, coinciding with increased gaming sessions. Try incorporating more breaks or outdoor activities.</p>
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-icon">✨</div>
+                    <div class="insight-content">
+                        <h4>Positive Trend</h4>
+                        <p>Great news! Your overall mood has improved by 20% over the past two weeks as you've been meeting your screen time goals consistently.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mood-history">
+                <h3>Recent Mood Entries</h3>
+                
+                <div class="mood-entry">
+                    <div class="mood-entry-header">
+                        <div class="mood-info">
+                            <div class="mood-emoji-large">🙂</div>
+                            <div class="mood-details">
+                                <span class="mood-label">Good</span>
+                                <span class="mood-date">November 4, 2025</span>
+                            </div>
+                        </div>
+                        <div class="mood-actions">
+                            <button class="btn-icon edit-mood" title="Edit">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            </button>
+                            <button class="btn-icon delete-mood" title="Delete">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mood-note">Productive work day. Managed to stay within my screen time goals and felt energized throughout.</div>
+                    <div class="mood-stats">
+                        <span class="stat-item">📱 6h 45m total screen time</span>
+                        <span class="stat-item">✓ 2 of 3 goals met</span>
+                    </div>
+                </div>
+                
+                <div class="mood-entry">
+                    <div class="mood-entry-header">
+                        <div class="mood-info">
+                            <div class="mood-emoji-large">😐</div>
+                            <div class="mood-details">
+                                <span class="mood-label">Okay</span>
+                                <span class="mood-date">November 3, 2025</span>
+                            </div>
+                        </div>
+                        <div class="mood-actions">
+                            <button class="btn-icon edit-mood" title="Edit">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            </button>
+                            <button class="btn-icon delete-mood" title="Delete">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mood-note">Spent more time gaming than planned. Felt a bit sluggish by the evening.</div>
+                    <div class="mood-stats">
+                        <span class="stat-item">📱 8h 15m total screen time</span>
+                        <span class="stat-item">✓ 1 of 3 goals met</span>
+                    </div>
+                </div>
+                
+                <div class="mood-entry">
+                    <div class="mood-entry-header">
+                        <div class="mood-info">
+                            <div class="mood-emoji-large">😄</div>
+                            <div class="mood-details">
+                                <span class="mood-label">Excellent</span>
+                                <span class="mood-date">November 2, 2025</span>
+                            </div>
+                        </div>
+                        <div class="mood-actions">
+                            <button class="btn-icon edit-mood" title="Edit">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            </button>
+                            <button class="btn-icon delete-mood" title="Delete">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mood-note">Amazing day! Took regular breaks from screens and went for a walk. Completed all my goals.</div>
+                    <div class="mood-stats">
+                        <span class="stat-item">📱 5h 30m total screen time</span>
+                        <span class="stat-item">✓ 3 of 3 goals met</span>
+                    </div>
+                </div>
+                
+                <div class="mood-entry">
+                    <div class="mood-entry-header">
+                        <div class="mood-info">
+                            <div class="mood-emoji-large">😟</div>
+                            <div class="mood-details">
+                                <span class="mood-label">Down</span>
+                                <span class="mood-date">November 1, 2025</span>
+                            </div>
+                        </div>
+                        <div class="mood-actions">
+                            <button class="btn-icon edit-mood" title="Edit">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            </button>
+                            <button class="btn-icon delete-mood" title="Delete">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mood-note">Scrolled social media too much. Felt anxious and couldn't focus well.</div>
+                    <div class="mood-stats">
+                        <span class="stat-item">📱 9h 45m total screen time</span>
+                        <span class="stat-item">✓ 0 of 3 goals met</span>
+                    </div>
+                </div>
+                
+                <div class="mood-entry">
+                    <div class="mood-entry-header">
+                        <div class="mood-info">
+                            <div class="mood-emoji-large">🙂</div>
+                            <div class="mood-details">
+                                <span class="mood-label">Good</span>
+                                <span class="mood-date">October 31, 2025</span>
+                            </div>
+                        </div>
+                        <div class="mood-actions">
+                            <button class="btn-icon edit-mood" title="Edit">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            </button>
+                            <button class="btn-icon delete-mood" title="Delete">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mood-note">Balanced day. Worked on a project and relaxed with a movie in the evening.</div>
+                    <div class="mood-stats">
+                        <span class="stat-item">📱 7h 20m total screen time</span>
+                        <span class="stat-item">✓ 2 of 3 goals met</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Edit Mood Modal -->
+    <div id="editMoodModal" class="modal">
+        <div class="modal-content">
+            <h3>Edit Mood Entry</h3>
+            <form id="editMoodForm">
+                <div class="form-group">
+                    <label>Mood</label>
+                    <div class="mood-selector small">
+                        <button type="button" class="mood-btn small" data-mood="very-happy">
+                            <div class="mood-emoji">😄</div>
+                        </button>
+                        <button type="button" class="mood-btn small" data-mood="happy">
+                            <div class="mood-emoji">🙂</div>
+                        </button>
+                        <button type="button" class="mood-btn small" data-mood="neutral">
+                            <div class="mood-emoji">😐</div>
+                        </button>
+                        <button type="button" class="mood-btn small" data-mood="sad">
+                            <div class="mood-emoji">😟</div>
+                        </button>
+                        <button type="button" class="mood-btn small" data-mood="very-sad">
+                            <div class="mood-emoji">😢</div>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editMoodNote">Note</label>
+                    <textarea id="editMoodNote" rows="3"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary cancel-edit-mood">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
