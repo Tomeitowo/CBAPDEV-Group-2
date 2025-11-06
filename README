@@ -1,0 +1,138 @@
+# Hypnos - Screen Time Management Web Application
+
+## Overview
+Hypnos is a web application designed to help users track, manage, and reduce their screen time through features like activity timers, goal setting, mood tracking, and insightful analytics.
+
+## Color Palette
+- Primary Colors: 
+  - Blues (#667eea, #a3bffa, #bee3f8)
+  - Greens (#48bb78, #9ae6b4, #c6f6d5)
+  - Purples (#b794f6, #d6bcfa, #e9d8fd)
+- Background: Gradient from sky blue to light purple
+- Text: Dark gray readability
+
+# logo
+- For now, the logo is a simple text; a proper logo shall be worked upon by the group
+
+## File Structure
+- **index.html** - Login page; has a button where you can register an account for new users
+- **register.html** - New account registration
+- **home.html** - Main dashboard with 4 navigation cards for each feature
+- **sessions.html** - Activity session tracking with timer
+- **goals.html** - Goal setting and progress tracking
+- **mood.html** - Mood tracking and insights
+- **insights.html** - Analytics and data visualizations
+- **profile.html** - Account viewing and profile management
+- **styles.css** - For styling
+- **script.js** - Main JavaScript functionality
+- **charts.js** - Visualizations for insights page
+
+## HYPNOS Features
+
+### 1. User Authentication
+- Login page with username and password fields
+- Registration page for new accounts
+- Form validation
+- For phase 1, it will only accept the five hardcoded users as the valid usernames; otherwise, it does not exist and the dashboard should not open
+
+### 2. Dashboard/Homepage
+- 4 main navigation cards: Sessions, Goals, Mood, Insights
+- Header with logo (Hypnos) and profile button
+
+### 3. Activity Sessions (CRUD)
+- **Create**: Real-time timer with category selection
+- **Read**: Display of recent sessions with date, duration, and category
+- **Update**: Edit sessions with modal form
+- **Delete**: Remove sessions with confirmation
+- **Search**: Search bar to filter sessions by category or date
+- Sample data: 6+ sessions across different categories
+
+### 4. Goals (CRUD)
+- **Create**: New goal modal with name, category, description, and time limit
+- **Read**: Active and completed goals with progress bars
+- **Update**: Edit goal parameters
+- **Delete**: Remove goals with confirmation
+  - Removing it from the completed list shall move it to the active list, you can permanently remove it from here
+- **Search**: Filter goals by category
+- Sample data: 5 goals (3 active, 2 completed)
+- Visual progress tracking with percentage
+- Streak tracking and status indicators
+
+### 5. Mood Tracker (CRUD)
+- **Create**: Choose among the 5 mood options (Excellent, Good, Okay, Down, Struggling) with emoji selector
+- **Read**: Display mood history with correlations to screen time
+- **Update**: Edit mood entries via modal
+- **Delete**: Remove mood entries with confirmation
+- Asks you to choose a mood and then will assign it to what the day is on that day
+- Sample data: 5+ mood entries with notes and stats
+- Insights showing patterns between mood and screen time
+
+### 6. Insights & Analytics
+- Time range filter (7, 30, 90 days)
+- 4 summary stat cards (Total Screen Time, Goals Achieved, Average Mood, Daily Average)
+- Screen Time Trend line chart (7 days)
+- Category breakdown pie chart
+- Goal progress visualization
+- Personalized recommendations based on usage patterns
+
+### 7. Profile Management
+- View profile information
+- Update username and email
+- Change password functionality
+- Delete account option (with confirmation modal)
+
+## Sample Data (5+ entries each)
+- **Sessions**: 6 sessions across Social Media, Work, Gaming, Movies, Study categories
+- **Goals**: 5 goals (3 active, 2 completed)
+- **Mood Entries**: 5 entries spanning different dates and moods
+- **User Profile**: Sarah Johnson (sample user)
+
+## Navigation Flow
+
+1. index.html (Login)
+2. register.html (Optional: New Account)
+3. home.html (Dashboard)
+   - sessions.html (Activity Tracking)
+   - goals.html (Goal Management)
+   - mood.html (Mood Tracking
+   - insights.html (Analytics)
+   - profile.html (View and update account details/delete account)
+
+## Technologies Used
+- HTML5
+- CSS3
+- JavaScript
+- Chart.js (for data visualizations)
+
+## Interactive Features
+- Timer functionality with start/pause/stop controls
+- Real-time search/filtering
+- Form validation
+- Mood emoji selector
+- Progress bars
+
+## How to Run
+1. Open `index.html` in a web browser to start at the login page
+2. Use any username/password to "login"
+	- acct registration is not yet functional; please use any of the following hard-coded users:
+		- JohnMiguel: Hello!123
+		- JuanDelaCruz: Pilipinas
+		- SophiaCruz: 12345
+		- JoseRizal: 54321
+		- MannyPacman: labanlang
+3. Navigate through the dashboard to explore all features
+
+## Future Enhancements (Phase 2)
+- Connect to Node.js backend
+- Database integration for persistent data
+- Actual timer alerts/notifications
+- Export data functionality
+- Challenge system with friends (gamified)
+- For mood tracker, use a calendar that you can iinteract with instead, clicking on a day on that calendar will open a new window that will allow you to set your mood for that day (if too complicated, at least use a dropdown so we can at least set moods on previous days)
+
+## Notes
+- All data is currently hardcoded as per Phase 1 requirements
+- No backend integration yet
+- Timer works with real JavaScript setInterval functionality
+- Charts use real Chart.js library from CDN
+- All CRUD operations are simulated with alerts and DOM manipulation
