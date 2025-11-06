@@ -1,3 +1,4 @@
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -179,3 +180,331 @@ body {
     position: relative;
     top: -12px;
 }
+
+/* Header Styles */
+.main-header {
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px 32px;
+    overflow: hidden;
+}
+
+.logo-header {
+    float: left;
+}
+
+.logo-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #667eea;
+}
+
+.header-right {
+    float: right;
+}
+
+.profile-btn,
+.back-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #2d3748;
+    font-weight: 600;
+    margin-left: 16px;
+}
+
+.profile-btn:hover,
+.back-btn:hover {
+    background: #edf2f7;
+    color: #667eea;
+}
+
+/* Dashboard Styles */
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 32px;
+}
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.welcome-section h2 {
+    font-size: 36px;
+    color: #2d3748;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #4a5568;
+    font-size: 18px;
+}
+
+.dashboard-grid {
+    text-align: center;
+}
+
+.dashboard-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    text-decoration: none;
+    color: #2d3748;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 0 10px 24px 10px;
+    display: inline-block;
+    width: 22%;
+    vertical-align: top;
+}
+
+.dashboard-card:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    margin: 0 auto 24px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 40px;
+}
+
+.card-sessions .card-icon {
+    background: #667eea;
+    color: white;
+}
+
+.card-goals .card-icon {
+    background: #48bb78;
+    color: white;
+}
+
+.card-mood .card-icon {
+    background: #b794f6;
+    color: white;
+}
+
+.card-insights .card-icon {
+    background: #667eea;
+    color: white;
+}
+
+.dashboard-card h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.dashboard-card p {
+    color: #4a5568;
+    font-size: 16px;
+}
+
+/* Content Page Styles */
+.content-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px;
+}
+
+.page-header {
+    margin-bottom: 32px;
+}
+
+.page-header h2 {
+    font-size: 32px;
+    color: #2d3748;
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: #4a5568;
+    font-size: 18px;
+}
+
+.content-container {
+    display: block;
+}
+
+.action-bar {
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.search-box {
+    background: #ffffff;
+    padding: 12px 16px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    float: left;
+    width: 60%;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 90%;
+    font-size: 16px;
+}
+
+.action-bar .btn {
+    float: right;
+    margin-left: 12px;
+}
+
+/* Timer Card */
+.timer-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+.active-session {
+    border: 3px solid #667eea;
+}
+
+.timer-card h3 {
+    font-size: 20px;
+    margin-bottom: 24px;
+    color: #2d3748;
+}
+
+.timer-display {
+    display: block;
+}
+
+.timer-time {
+    font-size: 64px;
+    font-weight: 700;
+    text-align: center;
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.timer-category {
+    margin-bottom: 20px;
+}
+
+.timer-category select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.timer-controls {
+    text-align: center;
+}
+
+.timer-controls button {
+    margin: 0 6px;
+    min-width: 120px;
+}
+
+/* Sessions List */
+.sessions-list {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+.sessions-list h3 {
+    font-size: 24px;
+    margin-bottom: 24px;
+    color: #2d3748;
+}
+
+.session-item {
+    padding: 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.session-item:hover {
+    border-color: #667eea;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.session-info {
+    float: left;
+    width: 70%;
+}
+
+.session-category {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 16px;
+}
+
+.session-category.social-media {
+    background: #e9d8fd;
+    color: #b794f6;
+}
+
+.session-category.work {
+    background: #c6f6d5;
+    color: #48bb78;
+}
+
+.session-category.gaming {
+    background: #bee3f8;
+    color: #667eea;
+}
+
+.session-category.movies {
+    background: #feebc8;
+    color: #ed8936;
+}
+
+.session-category.study {
+    background: #e6fffa;
+    color: #319795;
+}
+
+.session-category.other {
+    background: #edf2f7;
+    color: #4a5568;
+}
+
+.session-details {
+    display: inline;
+    color: #4a5568;
+    font-size: 14px;
+}
+
+.session-duration {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.session-actions {
+    float: right;
+}
+
+.session-actions button {
+    margin-left: 8px;
+}
+
