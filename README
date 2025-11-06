@@ -136,3 +136,4 @@ Hypnos is a web application designed to help users track, manage, and reduce the
 - Timer works with real JavaScript setInterval functionality
 - Charts use real Chart.js library from CDN
 - All CRUD operations are simulated with alerts and DOM manipulation
+- SVGs are from an online source (https://www.svgviewer.dev/s/497869/edit)
