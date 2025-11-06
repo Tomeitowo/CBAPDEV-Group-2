@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessions - Hypnos</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/favicon.png">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-header">
+                <h1>Hypnos</h1>
+            </div>
+            <div class="header-right">
+                <a href="/home" class="back-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/profile" class="profile-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="content-page">
+        <div class="page-header">
+            <h2>Activity Sessions</h2>
+            <p>Track and manage your screen time activities</p>
+        </div>
+        
+        <div class="content-container">
+            <div class="action-bar">
+                <div class="search-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" id="sessionSearch" placeholder="Search sessions by category or date...">
+                </div>
+                <button class="btn btn-primary" id="newSessionBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    New Session
+                </button>
+            </div>
+            
+            <div class="timer-card active-session">
+                <h3>Current Session</h3>
+                <div class="timer-display">
+                    <div class="timer-time" id="timerDisplay">00:00:00</div>
+                    <div class="timer-category">
+                        <select id="categorySelect">
+                            <option value="">Select Category</option>
+                            <option value="Social Media">Social Media</option>
+                            <option value="Gaming">Gaming</option>
+                            <option value="Movies">Movies & Entertainment</option>
+                            <option value="Work">Work-related</option>
+                            <option value="Study">Study & Learning</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="timer-controls">
+                        <button class="btn btn-success" id="startBtn">Start</button>
+                        <button class="btn btn-warning" id="pauseBtn" disabled>Pause</button>
+                        <button class="btn btn-danger" id="stopBtn" disabled>Stop</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sessions-list">
+                <h3>Recent Sessions</h3>
+                
+                <div class="session-item">
+                    <div class="session-info">
+                        <div class="session-category social-media">Social Media</div>
+                        <div class="session-details">
+                            <div class="session-date">November 4, 2025</div>
+                            <div class="session-duration">2h 15m</div>
+                        </div>
+                    </div>
+                    <div class="session-actions">
+                        <button class="btn-icon edit-session" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                        </button>
+                        <button class="btn-icon delete-session" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="session-item">
+                    <div class="session-info">
+                        <div class="session-category work">Work-related</div>
+                        <div class="session-details">
+                            <div class="session-date">November 4, 2025</div>
+                            <div class="session-duration">4h 30m</div>
+                        </div>
+                    </div>
+                    <div class="session-actions">
+                        <button class="btn-icon edit-session" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                        </button>
+                        <button class="btn-icon delete-session" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="session-item">
+                    <div class="session-info">
+                        <div class="session-category gaming">Gaming</div>
+                        <div class="session-details">
+                            <div class="session-date">November 3, 2025</div>
+                            <div class="session-duration">1h 45m</div>
+                        </div>
+                    </div>
+                    <div class="session-actions">
+                        <button class="btn-icon edit-session" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                        </button>
+                        <button class="btn-icon delete-session" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="session-item">
+                    <div class="session-info">
+                        <div class="session-category movies">Movies & Entertainment</div>
+                        <div class="session-details">
+                            <div class="session-date">November 3, 2025</div>
+                            <div class="session-duration">3h 00m</div>
+                        </div>
+                    </div>
+                    <div class="session-actions">
+                        <button class="btn-icon edit-session" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                        </button>
+                        <button class="btn-icon delete-session" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="session-item">
+                    <div class="session-info">
+                        <div class="session-category study">Study & Learning</div>
+                        <div class="session-details">
+                            <div class="session-date">November 2, 2025</div>
+                            <div class="session-duration">2h 30m</div>
+                        </div>
+                    </div>
+                    <div class="session-actions">
+                        <button class="btn-icon edit-session" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                        </button>
+                        <button class="btn-icon delete-session" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="session-item">
+                    <div class="session-info">
+                        <div class="session-category social-media">Social Media</div>
+                        <div class="session-details">
+                            <div class="session-date">November 2, 2025</div>
+                            <div class="session-duration">1h 20m</div>
+                        </div>
+                    </div>
+                    <div class="session-actions">
+                        <button class="btn-icon edit-session" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                        </button>
+                        <button class="btn-icon delete-session" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Edit Session Modal -->
+    <div id="editSessionModal" class="modal">
+        <div class="modal-content">
+            <h3>Edit Session</h3>
+            <form id="editSessionForm">
+                <div class="form-group">
+                    <label for="editCategory">Category</label>
+                    <select id="editCategory" required>
+                        <option value="Social Media">Social Media</option>
+                        <option value="Gaming">Gaming</option>
+                        <option value="Movies">Movies & Entertainment</option>
+                        <option value="Work">Work-related</option>
+                        <option value="Study">Study & Learning</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editDuration">Duration (minutes)</label>
+                    <input type="number" id="editDuration" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary cancel-edit">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>
