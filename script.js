@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    if (goalForm) {
+        if (goalForm) {
         goalForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
