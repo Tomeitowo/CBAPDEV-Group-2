@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goals - Hypnos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-header">
+                <h1>Hypnos</h1>
+            </div>
+            <div class="header-right">
+                <a href="home.html" class="back-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="profile.html" class="profile-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="content-page">
+        <div class="page-header">
+            <h2>Screen Time Goals</h2>
+            <p>Set and track your digital wellness objectives</p>
+        </div>
+        
+        <div class="content-container">
+            <div class="action-bar">
+                <div class="search-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" id="goalSearch" placeholder="Search goals by category...">
+                </div>
+                <button class="btn btn-primary" id="newGoalBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    New Goal
+                </button>
+            </div>
+            
+            <div class="goals-section">
+                <h3>Active Goals</h3>
+                
+                <div class="goal-card">
+                    <div class="goal-header">
+                        <div class="goal-title">
+                            <h4>Reduce Social Media Time</h4>
+                            <span class="goal-category social-media">Social Media</span>
+                        </div>
+                        <div class="goal-actions">
+                            <button class="btn-icon edit-goal" title="Edit">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            </button>
+                            <button class="btn-icon delete-goal" title="Delete">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="goal-description">
+                        Limit social media usage to less than 1 hour per day
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-info">
+                            <span>Today: 0h 45m / 1h 00m</span>
+                            <span class="progress-percentage">75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="goal-footer">
+                        <span class="goal-streak">🔥 5 day streak</span>
+                        <span class="goal-status status-active">On Track</span>
+                    </div>
+                </div>
+                
+                <div class="goal-card">
+                    <div class="goal-header">
+                        <div class="goal-title">
+                            <h4>Work-Life Balance</h4>
+                            <span class="goal-category work">Work-related</span>
+                        </div>
+                        <div class="goal-actions">
+                            <button class="btn-icon edit-goal" title="Edit">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            </button>
+                            <button class="btn-icon delete-goal" title="Delete">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="goal-description">
+                        Keep work-related screen time under 6 hours per day
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-info">
+                            <span>Today: 4h 30m / 6h 00m</span>
+                            <span class="progress-percentage">75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="goal-footer">
+                        <span class="goal-streak">🔥 12 day streak</span>
+                        <span class="goal-status status-active">On Track</span>
+                    </div>
+                </div>
+                
+                <div class="goal-card">
+                    <div class="goal-header">
+                        <div class="goal-title">
+                            <h4>Gaming Moderation</h4>
+                            <span class="goal-category gaming">Gaming</span>
+                        </div>
+                        <div class="goal-actions">
+                            <button class="btn-icon edit-goal" title="Edit">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            </button>
+                            <button class="btn-icon delete-goal" title="Delete">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="goal-description">
+                        Limit gaming sessions to 2 hours per day maximum
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-info">
+                            <span>Today: 2h 30m / 2h 00m</span>
+                            <span class="progress-percentage">125%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill exceeded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="goal-footer">
+                        <span class="goal-streak">🔥 3 day streak</span>
+                        <span class="goal-status status-exceeded">Exceeded</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="goals-section">
+                <h3>Completed Goals</h3>
+                
+                <div class="goal-card completed">
+                    <div class="goal-header">
+                        <div class="goal-title">
+                            <h4>Reduce Total Screen Time</h4>
+                            <span class="goal-category other">General</span>
+                        </div>
+                    </div>
+                    <div class="goal-description">
+                        Reduce daily screen time from 10 hours to 8 hours
+                    </div>
+                    <div class="goal-footer">
+                        <span class="goal-streak">✓ Completed on Oct 28, 2025</span>
+                        <span class="goal-status status-completed">Completed</span>
+                    </div>
+                </div>
+                
+                <div class="goal-card completed">
+                    <div class="goal-header">
+                        <div class="goal-title">
+                            <h4>Entertainment Balance</h4>
+                            <span class="goal-category movies">Movies & Entertainment</span>
+                        </div>
+                    </div>
+                    <div class="goal-description">
+                        Keep entertainment screen time under 3 hours daily for 2 weeks
+                    </div>
+                    <div class="goal-footer">
+                        <span class="goal-streak">✓ Completed on Oct 15, 2025</span>
+                        <span class="goal-status status-completed">Completed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- New/Edit Goal Modal -->
+    <div id="goalModal" class="modal">
+        <div class="modal-content">
+            <h3 id="goalModalTitle">Create New Goal</h3>
+            <form id="goalForm">
+                <div class="form-group">
+                    <label for="goalName">Goal Name</label>
+                    <input type="text" id="goalName" placeholder="e.g., Reduce Instagram time" required>
+                </div>
+                <div class="form-group">
+                    <label for="goalCategory">Category</label>
+                    <select id="goalCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="Social Media">Social Media</option>
+                        <option value="Gaming">Gaming</option>
+                        <option value="Movies">Movies & Entertainment</option>
+                        <option value="Work">Work-related</option>
+                        <option value="Study">Study & Learning</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="goalDescription">Description</label>
+                    <textarea id="goalDescription" rows="3" placeholder="Describe your goal..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="goalLimit">Daily Time Limit (hours)</label>
+                    <input type="number" id="goalLimit" step="0.5" min="0" placeholder="e.g., 2" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary cancel-goal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Goal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

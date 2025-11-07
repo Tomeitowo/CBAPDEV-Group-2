@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights - Hypnos</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-header">
+                <h1>Hypnos</h1>
+            </div>
+            <div class="header-right">
+                <a href="home.html" class="back-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="profile.html" class="profile-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="content-page">
+        <div class="page-header">
+            <h2>Insights & Analytics</h2>
+            <p>Visualize your screen time patterns and progress</p>
+        </div>
+        
+        <div class="content-container">
+            <div class="filter-bar">
+                <select id="timeRangeFilter" class="filter-select">
+                    <option value="7days">Last 7 Days</option>
+                    <option value="30days">Last 30 Days</option>
+                    <option value="90days">Last 90 Days</option>
+                </select>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h4>Total Screen Time</h4>
+                        <div class="stat-value">52h 15m</div>
+                        <div class="stat-change positive">↓ 15% from last week</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h4>Goals Achieved</h4>
+                        <div class="stat-value">18 / 21</div>
+                        <div class="stat-change positive">↑ 86% success rate</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h4>Average Mood</h4>
+                        <div class="stat-value">Good 🙂</div>
+                        <div class="stat-change positive">↑ Improving</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M18 20V10"></path>
+                            <path d="M12 20V4"></path>
+                            <path d="M6 20v-6"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h4>Daily Average</h4>
+                        <div class="stat-value">7h 28m</div>
+                        <div class="stat-change positive">↓ 1h 12m decrease</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-card">
+                <h3>Screen Time Trend (Last 7 Days)</h3>
+                <canvas id="screenTimeTrendChart"></canvas>
+            </div>
+            
+            <div class="charts-row">
+                <div class="chart-card">
+                    <h3>Time by Category</h3>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+                
+                <div class="chart-card">
+                    <h3>Goal Progress</h3>
+                    <div class="goal-progress-list">
+                        <div class="progress-item">
+                            <div class="progress-header">
+                                <span>Social Media</span>
+                                <span class="progress-value">75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%; background: #667eea;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-header">
+                                <span>Work-related</span>
+                                <span class="progress-value">75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%; background: #48bb78;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-header">
+                                <span>Gaming</span>
+                                <span class="progress-value">125%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill exceeded" style="width: 100%; background: #f56565;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-card">
+                <h3>Mood vs Screen Time Correlation</h3>
+                <canvas id="moodCorrelationChart"></canvas>
+            </div>
+            
+            <div class="insights-summary">
+                <h3>Weekly Summary</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="summary-label">Most Used Category</div>
+                        <div class="summary-value">Work-related (45%)</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">Best Day</div>
+                        <div class="summary-value">Wednesday (5h 30m)</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">Longest Session</div>
+                        <div class="summary-value">4h 30m (Work)</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">Active Streak</div>
+                        <div class="summary-value">12 days 🔥</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recommendations-card">
+                <h3>Personalized Recommendations</h3>
+                <div class="recommendation-list">
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon">💡</div>
+                        <div class="recommendation-content">
+                            <h4>Reduce Social Media During Evenings</h4>
+                            <p>You tend to spend more time on social media after 8 PM, which correlates with lower mood scores. Try setting a hard cutoff at 9 PM.</p>
+                        </div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon">🎯</div>
+                        <div class="recommendation-content">
+                            <h4>Great Progress on Work Balance!</h4>
+                            <p>You've successfully kept your work screen time under 6 hours for 12 consecutive days. Keep up the excellent work-life balance!</p>
+                        </div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon">⏰</div>
+                        <div class="recommendation-content">
+                            <h4>Gaming Time Management</h4>
+                            <p>Consider using the timer feature more actively for gaming sessions. Setting a 90-minute timer can help you stay within your 2-hour daily goal.</p>
+                        </div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon">🌟</div>
+                        <div class="recommendation-content">
+                            <h4>Overall Improvement</h4>
+                            <p>Your total screen time has decreased by 15% compared to last week, and your mood scores have improved. You're on the right track!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="script.js"></script>
+    <script src="charts.js"></script>
+</body>
+</html>
