@@ -22,19 +22,19 @@ const users = {
     }
 };
 
-// Get current logged in user from localStorage
+// Get current logged in user from sessionStorage
 function getCurrentUser() {
-    return localStorage.getItem('currentUser');
+    return sessionStorage.getItem('currentUser');
 }
 
 // Set current logged in user
 function setCurrentUser(username) {
-    localStorage.setItem('currentUser', username);
+    sessionStorage.setItem('currentUser', username);
 }
 
 // Clear current user (logout)
 function clearCurrentUser() {
-    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
 }
 
 // Get user data
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (registerForm) {
         registerForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Registration is currently disabled. Please use one of the existing accounts:\n\nJohnMiguel: Hello!123\nJuanDelaCruz: Pilipinas\nSophiaCruz: 12345\nJoseRizal: 54321\nMannyPacman: labanlang');
+            alert('Phase 1 does not have any database implementation yet, thus your created account is not added yet. To access the prototype, please use one of the existing accounts:\n\nJohnMiguel: Hello!123\nJuanDelaCruz: Pilipinas\nSophiaCruz: 12345\nJoseRizal: 54321\nMannyPacman: labanlang');
         });
     }
     
@@ -281,14 +281,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Goals functionality - CREATE NEW GOAL via modal
+    // Goals functionality
     const newGoalBtn = document.getElementById('newGoalBtn');
     const goalModal = document.getElementById('goalModal');
     const goalForm = document.getElementById('goalForm');
     const cancelGoalBtns = document.querySelectorAll('.cancel-goal');
+    let editingGoalCard = null;
     
     if (newGoalBtn && goalModal) {
         newGoalBtn.addEventListener('click', function() {
+            editingGoalCard = null;
+            document.getElementById('goalModalTitle').textContent = 'Create New Goal';
+            goalForm.reset();
             goalModal.classList.add('active');
         });
     }
@@ -298,6 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.addEventListener('click', function() {
                 goalModal.classList.remove('active');
                 goalForm.reset();
+                editingGoalCard = null;
             });
         });
     }
@@ -311,11 +316,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const goalDescription = document.getElementById('goalDescription').value;
             const goalLimit = parseFloat(document.getElementById('goalLimit').value);
             
-            addGoalToList(goalName, goalCategory, goalDescription, goalLimit);
+            if (editingGoalCard) {
+                updateGoalCard(editingGoalCard, goalName, goalCategory, goalDescription, goalLimit);
+                alert('Goal updated successfully!');
+            } else {
+                addGoalToList(goalName, goalCategory, goalDescription, goalLimit);
+                alert('Goal created successfully!');
+            }
             
-            alert('Goal created successfully!');
             goalModal.classList.remove('active');
             goalForm.reset();
+            editingGoalCard = null;
         });
     }
     
@@ -332,6 +343,9 @@ document.addEventListener('DOMContentLoaded', function() {
         else if (category === 'Movies' || category === 'Movies & Entertainment') categoryClass = 'movies';
         else if (category === 'Study' || category === 'Study & Learning') categoryClass = 'study';
         
+        // Use description if provided, otherwise use a default message
+        const displayDescription = description.trim() || 'No description provided';
+        
         const goalHTML = `
             <div class="goal-card">
                 <div class="goal-header">
@@ -340,12 +354,27 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span class="goal-category ${categoryClass}">${category}</span>
                     </div>
                     <div class="goal-actions">
+                        <button class="btn-icon complete-goal" title="Mark as Completed">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9 11 12 14 22 4"></polyline>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                            </svg>
+                        </button>
+                        <button class="btn-icon edit-goal" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                        </button>
                         <button class="btn-icon delete-goal" title="Delete">
-                            <span class="icon-delete"></span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
                         </button>
                     </div>
                 </div>
-                <div class="goal-description">${description}</div>
+                <div class="goal-description">${displayDescription}</div>
                 <div class="goal-progress">
                     <div class="progress-info">
                         <span>Today: 0h 00m / ${limit}h 00m</span>
@@ -366,26 +395,223 @@ document.addEventListener('DOMContentLoaded', function() {
         const h3 = goalsSection.querySelector('h3');
         h3.insertAdjacentHTML('afterend', goalHTML);
         
-        // Add delete functionality to the new button
-        const newDeleteBtn = h3.nextElementSibling.querySelector('.delete-goal');
-        newDeleteBtn.addEventListener('click', function() {
-            if (confirm('Are you sure you want to delete this goal?')) {
-                this.closest('.goal-card').remove();
-                alert('Goal deleted successfully!');
-            }
-        });
+        // Add event listeners to the new buttons
+        const newGoalCard = h3.nextElementSibling;
+        setupGoalCardEventListeners(newGoalCard);
     }
     
-    // Goals delete
-    const deleteGoalBtns = document.querySelectorAll('.delete-goal');
+    // Update existing goal card
+    function updateGoalCard(goalCard, name, category, description, limit) {
+        // Get category class
+        let categoryClass = 'other';
+        if (category === 'Social Media') categoryClass = 'social-media';
+        else if (category === 'Work' || category === 'Work-related') categoryClass = 'work';
+        else if (category === 'Gaming') categoryClass = 'gaming';
+        else if (category === 'Movies' || category === 'Movies & Entertainment') categoryClass = 'movies';
+        else if (category === 'Study' || category === 'Study & Learning') categoryClass = 'study';
+        
+        const displayDescription = description.trim() || 'No description provided';
+        
+        // Update title and category
+        goalCard.querySelector('.goal-title h4').textContent = name;
+        const categorySpan = goalCard.querySelector('.goal-category');
+        categorySpan.className = 'goal-category ' + categoryClass;
+        categorySpan.textContent = category;
+        
+        // Update description
+        goalCard.querySelector('.goal-description').textContent = displayDescription;
+        
+        // Update limit in progress info
+        const progressInfo = goalCard.querySelector('.progress-info span');
+        const currentProgress = progressInfo.textContent.split(' / ')[0];
+        progressInfo.textContent = currentProgress + ' / ' + limit + 'h 00m';
+    }
     
-    deleteGoalBtns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            if (confirm('Are you sure you want to delete this goal?')) {
-                btn.closest('.goal-card').remove();
-                alert('Goal deleted successfully!');
+    // Edit goal function
+    function editGoal(goalCard) {
+        editingGoalCard = goalCard;
+        
+        const name = goalCard.querySelector('.goal-title h4').textContent;
+        const category = goalCard.querySelector('.goal-category').textContent;
+        const description = goalCard.querySelector('.goal-description').textContent;
+        const limitText = goalCard.querySelector('.progress-info span').textContent;
+        const limit = parseFloat(limitText.split(' / ')[1]);
+        
+        document.getElementById('goalModalTitle').textContent = 'Edit Goal';
+        document.getElementById('goalName').value = name;
+        document.getElementById('goalCategory').value = category;
+        document.getElementById('goalDescription').value = description === 'No description provided' ? '' : description;
+        document.getElementById('goalLimit').value = limit;
+        
+        goalModal.classList.add('active');
+    }
+    
+    // Setup event listeners for a goal card
+    function setupGoalCardEventListeners(goalCard) {
+        const deleteBtn = goalCard.querySelector('.delete-goal');
+        const editBtn = goalCard.querySelector('.edit-goal');
+        const completeBtn = goalCard.querySelector('.complete-goal');
+        const reactivateBtn = goalCard.querySelector('.reactivate-goal');
+        
+        if (deleteBtn) {
+            deleteBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to delete this goal?')) {
+                    goalCard.remove();
+                    alert('Goal deleted successfully!');
+                }
+            });
+        }
+        
+        if (editBtn) {
+            editBtn.addEventListener('click', function() {
+                editGoal(goalCard);
+            });
+        }
+        
+        if (completeBtn) {
+            completeBtn.addEventListener('click', function() {
+                completeGoal(goalCard);
+            });
+        }
+        
+        if (reactivateBtn) {
+            reactivateBtn.addEventListener('click', function() {
+                reactivateGoal(goalCard);
+            });
+        }
+    }
+    
+    // Complete goal function
+    function completeGoal(goalCard) {
+        if (confirm('Mark this goal as completed?')) {
+            // Add completed class
+            goalCard.classList.add('completed');
+            
+            // Remove progress section
+            const progressSection = goalCard.querySelector('.goal-progress');
+            if (progressSection) {
+                progressSection.remove();
             }
-        });
+            
+            // Change buttons to reactivate only
+            const goalActions = goalCard.querySelector('.goal-actions');
+            goalActions.innerHTML = `
+                <button class="btn-icon reactivate-goal" title="Reactivate Goal">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 7v6h6"></path>
+                        <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path>
+                    </svg>
+                </button>
+            `;
+            
+            // Update status and streak
+            const statusElement = goalCard.querySelector('.goal-status');
+            statusElement.textContent = 'Completed';
+            statusElement.className = 'goal-status status-completed';
+            
+            const streakElement = goalCard.querySelector('.goal-streak');
+            streakElement.textContent = '✓ Completed on ' + getTodayDate();
+            
+            // Move to completed goals section
+            const completedGoalsSection = document.querySelectorAll('.goals-section')[1];
+            const completedGoalsList = completedGoalsSection.querySelector('.goal-card:last-child');
+            
+            if (completedGoalsList) {
+                completedGoalsList.after(goalCard);
+            } else {
+                completedGoalsSection.appendChild(goalCard);
+            }
+            
+            // Re-attach event listeners
+            setupGoalCardEventListeners(goalCard);
+            
+            alert('Goal marked as completed!');
+        }
+    }
+    
+        // Reactivate goal function
+    function reactivateGoal(goalCard) {
+        if (confirm('Move this goal back to active goals?')) {
+            // Remove completed class
+            goalCard.classList.remove('completed');
+            
+            // Change buttons back to complete/edit/delete
+            const goalActions = goalCard.querySelector('.goal-actions');
+            goalActions.innerHTML = `
+                <button class="btn-icon complete-goal" title="Mark as Completed">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                </button>
+                <button class="btn-icon edit-goal" title="Edit">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                </button>
+                <button class="btn-icon delete-goal" title="Delete">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                </button>
+            `;
+            
+            // Add basic progress section
+            const goalDescription = goalCard.querySelector('.goal-description');
+            const goalFooter = goalCard.querySelector('.goal-footer');
+            
+            // Check if progress section already exists
+            if (!goalCard.querySelector('.goal-progress')) {
+                const progressHTML = `
+                    <div class="goal-progress">
+                        <div class="progress-info">
+                            <span>Today: 0h 00m / 2h 00m</span>
+                            <span class="progress-percentage">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                `;
+                
+                // Insert progress after description and before footer
+                goalDescription.insertAdjacentHTML('afterend', progressHTML);
+            }
+            
+            // Update status
+            const statusElement = goalCard.querySelector('.goal-status');
+            statusElement.textContent = 'Starting';
+            statusElement.className = 'goal-status status-active';
+            
+            // Update streak
+            const streakElement = goalCard.querySelector('.goal-streak');
+            streakElement.textContent = '🔥 0 day streak';
+            
+            // Move to active goals section - FIXED SELECTION
+            const goalsSections = document.querySelectorAll('.goals-section');
+            const activeGoalsSection = goalsSections[0]; // First section is active goals
+            
+            // Remove from current parent
+            goalCard.remove();
+            
+            // Add to active goals section (after the h3)
+            const activeH3 = activeGoalsSection.querySelector('h3');
+            activeH3.insertAdjacentHTML('afterend', goalCard.outerHTML);
+            
+            // Get the newly added card and set up event listeners
+            const newGoalCard = activeH3.nextElementSibling;
+            setupGoalCardEventListeners(newGoalCard);
+            
+            alert('Goal moved to active goals!');
+        }
+    }
+    
+    // Initialize existing goal cards
+    const goalCards = document.querySelectorAll('.goal-card');
+    goalCards.forEach(function(goalCard) {
+        setupGoalCardEventListeners(goalCard);
     });
     
     // Goal search
@@ -548,27 +774,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Delete account
     const deleteAccountBtn = document.getElementById('deleteAccountBtn');
-    const deleteModal = document.getElementById('deleteModal');
-    const cancelDeleteBtn = document.getElementById('cancelDelete');
     const confirmDeleteBtn = document.getElementById('confirmDelete');
     
     if (deleteAccountBtn) {
         deleteAccountBtn.addEventListener('click', function() {
-            deleteModal.classList.add('active');
-        });
-    }
-    
-    if (cancelDeleteBtn) {
-        cancelDeleteBtn.addEventListener('click', function() {
-            deleteModal.classList.remove('active');
-        });
-    }
-    
-    if (confirmDeleteBtn) {
-        confirmDeleteBtn.addEventListener('click', function() {
-            clearCurrentUser();
-            alert('Account deleted successfully. Redirecting to login...');
-            window.location.href = 'index.html';
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                clearCurrentUser();
+                alert('Account deleted successfully. Redirecting to login...');
+                window.location.href = 'index.html';
+            }
         });
     }
     
