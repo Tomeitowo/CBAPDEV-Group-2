@@ -53,6 +53,16 @@ function getTodayDate() {
     return formatDate(new Date());
 }
 
+// Get category class
+function getCategoryClass(category) {
+    if (category === 'Social Media') return 'social-media';
+    else if (category === 'Work-related' || category === 'Work') return 'work';
+    else if (category === 'Gaming') return 'gaming';
+    else if (category === 'Movies & Entertainment' || category === 'Movies') return 'movies';
+    else if (category === 'Study & Learning' || category === 'Study') return 'study';
+    else return 'other';
+}
+
 // Timer functionality
 let timerInterval = null;
 let timerSeconds = 0;
@@ -204,48 +214,70 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Add session to the list
+    // Add session to the list using DOM manipulation
     function addSessionToList(category, hours, minutes) {
         const sessionsList = document.querySelector('.sessions-list');
         if (!sessionsList) return;
         
         const duration = hours + 'h ' + minutes + 'm';
         const date = getTodayDate();
+        const categoryClass = getCategoryClass(category);
         
-        // Get category class
-        let categoryClass = 'other';
-        if (category === 'Social Media') categoryClass = 'social-media';
-        else if (category === 'Work-related' || category === 'Work') categoryClass = 'work';
-        else if (category === 'Gaming') categoryClass = 'gaming';
-        else if (category === 'Movies & Entertainment' || category === 'Movies') categoryClass = 'movies';
-        else if (category === 'Study & Learning' || category === 'Study') categoryClass = 'study';
+        // Create session item
+        const sessionItem = document.createElement('div');
+        sessionItem.className = 'session-item';
         
-        const sessionHTML = `
-            <div class="session-item">
-                <div class="session-info">
-                    <div class="session-category ${categoryClass}">${category}</div>
-                    <div class="session-details">
-                        <div class="session-date">${date}</div>
-                        <div class="session-duration">${duration}</div>
-                    </div>
-                </div>
-                <div class="session-actions">
-                    <button class="btn-icon delete-session" title="Delete">
-                        <span class="icon-delete"></span>
-                    </button>
-                </div>
-            </div>
-        `;
+        // Create session info
+        const sessionInfo = document.createElement('div');
+        sessionInfo.className = 'session-info';
+        
+        const sessionCategory = document.createElement('div');
+        sessionCategory.className = 'session-category ' + categoryClass;
+        sessionCategory.textContent = category;
+        
+        const sessionDetails = document.createElement('div');
+        sessionDetails.className = 'session-details';
+        
+        const sessionDate = document.createElement('div');
+        sessionDate.className = 'session-date';
+        sessionDate.textContent = date;
+        
+        const sessionDuration = document.createElement('div');
+        sessionDuration.className = 'session-duration';
+        sessionDuration.textContent = duration;
+        
+        // Build session details
+        sessionDetails.appendChild(sessionDate);
+        sessionDetails.appendChild(sessionDuration);
+        
+        // Build session info
+        sessionInfo.appendChild(sessionCategory);
+        sessionInfo.appendChild(sessionDetails);
+        
+        // Create session actions
+        const sessionActions = document.createElement('div');
+        sessionActions.className = 'session-actions';
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'btn-icon delete-session';
+        deleteBtn.title = 'Delete';
+        deleteBtn.innerHTML = '<span class="icon-delete"></span>';
+        
+        // Build session actions
+        sessionActions.appendChild(deleteBtn);
+        
+        // Build session item
+        sessionItem.appendChild(sessionInfo);
+        sessionItem.appendChild(sessionActions);
         
         // Insert at the beginning of the list (after h3)
         const h3 = sessionsList.querySelector('h3');
-        h3.insertAdjacentHTML('afterend', sessionHTML);
+        sessionsList.insertBefore(sessionItem, h3.nextSibling);
         
-        // Add delete functionality to the new button
-        const newDeleteBtn = h3.nextElementSibling.querySelector('.delete-session');
-        newDeleteBtn.addEventListener('click', function() {
+        // Add delete functionality
+        deleteBtn.addEventListener('click', function() {
             if (confirm('Are you sure you want to delete this session?')) {
-                this.closest('.session-item').remove();
+                sessionItem.remove();
                 alert('Session deleted successfully!');
             }
         });
@@ -307,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-        if (goalForm) {
+    if (goalForm) {
         goalForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -330,86 +362,150 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Add goal to the list
+    // Add goal to the list using DOM manipulation
     function addGoalToList(name, category, description, limit) {
         const goalsSection = document.querySelector('.goals-section');
         if (!goalsSection) return;
         
-        // Get category class
-        let categoryClass = 'other';
-        if (category === 'Social Media') categoryClass = 'social-media';
-        else if (category === 'Work' || category === 'Work-related') categoryClass = 'work';
-        else if (category === 'Gaming') categoryClass = 'gaming';
-        else if (category === 'Movies' || category === 'Movies & Entertainment') categoryClass = 'movies';
-        else if (category === 'Study' || category === 'Study & Learning') categoryClass = 'study';
-        
-        // Use description if provided, otherwise use a default message
+        const categoryClass = getCategoryClass(category);
         const displayDescription = description.trim() || 'No description provided';
         
-        const goalHTML = `
-            <div class="goal-card">
-                <div class="goal-header">
-                    <div class="goal-title">
-                        <h4>${name}</h4>
-                        <span class="goal-category ${categoryClass}">${category}</span>
-                    </div>
-                    <div class="goal-actions">
-                        <button class="btn-icon complete-goal" title="Mark as Completed">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="9 11 12 14 22 4"></polyline>
-                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                            </svg>
-                        </button>
-                        <button class="btn-icon edit-goal" title="Edit">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                            </svg>
-                        </button>
-                        <button class="btn-icon delete-goal" title="Delete">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="goal-description">${displayDescription}</div>
-                <div class="goal-progress">
-                    <div class="progress-info">
-                        <span>Today: 0h 00m / ${limit}h 00m</span>
-                        <span class="progress-percentage">0%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 0%"></div>
-                    </div>
-                </div>
-                <div class="goal-footer">
-                    <span class="goal-streak">🔥 0 day streak</span>
-                    <span class="goal-status status-active">Starting</span>
-                </div>
-            </div>
-        `;
+        // Create goal card
+        const goalCard = document.createElement('div');
+        goalCard.className = 'goal-card';
+        
+        // Create goal header
+        const goalHeader = document.createElement('div');
+        goalHeader.className = 'goal-header';
+        
+        const goalTitle = document.createElement('div');
+        goalTitle.className = 'goal-title';
+        
+        const titleH4 = document.createElement('h4');
+        titleH4.textContent = name;
+        
+        const categorySpan = document.createElement('span');
+        categorySpan.className = 'goal-category ' + categoryClass;
+        categorySpan.textContent = category;
+        
+        // Build goal title
+        goalTitle.appendChild(titleH4);
+        goalTitle.appendChild(categorySpan);
+        
+        // Create goal actions
+        const goalActions = document.createElement('div');
+        goalActions.className = 'goal-actions';
+        
+        // Create complete button
+        const completeBtn = document.createElement('button');
+        completeBtn.className = 'btn-icon complete-goal';
+        completeBtn.title = 'Mark as Completed';
+        completeBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>';
+        
+        // Create edit button
+        const editBtn = document.createElement('button');
+        editBtn.className = 'btn-icon edit-goal';
+        editBtn.title = 'Edit';
+        editBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>';
+        
+        // Create delete button
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'btn-icon delete-goal';
+        deleteBtn.title = 'Delete';
+        deleteBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>';
+        
+        // Build goal actions
+        goalActions.appendChild(completeBtn);
+        goalActions.appendChild(editBtn);
+        goalActions.appendChild(deleteBtn);
+        
+        // Build goal header
+        goalHeader.appendChild(goalTitle);
+        goalHeader.appendChild(goalActions);
+        
+        // Create goal description
+        const goalDescriptionElem = document.createElement('div');
+        goalDescriptionElem.className = 'goal-description';
+        goalDescriptionElem.textContent = displayDescription;
+        
+        // Create goal progress
+        const goalProgress = document.createElement('div');
+        goalProgress.className = 'goal-progress';
+        
+        const progressInfo = document.createElement('div');
+        progressInfo.className = 'progress-info';
+        
+        const progressText = document.createElement('span');
+        progressText.textContent = 'Today: 0h 00m / ' + limit + 'h 00m';
+        
+        const progressPercentage = document.createElement('span');
+        progressPercentage.className = 'progress-percentage';
+        progressPercentage.textContent = '0%';
+        
+        // Build progress info
+        progressInfo.appendChild(progressText);
+        progressInfo.appendChild(progressPercentage);
+        
+        const progressBar = document.createElement('div');
+        progressBar.className = 'progress-bar';
+        
+        const progressFill = document.createElement('div');
+        progressFill.className = 'progress-fill';
+        progressFill.style.width = '0%';
+        
+        // Build progress bar
+        progressBar.appendChild(progressFill);
+        
+        // Build goal progress
+        goalProgress.appendChild(progressInfo);
+        goalProgress.appendChild(progressBar);
+        
+        // Create goal footer
+        const goalFooter = document.createElement('div');
+        goalFooter.className = 'goal-footer';
+        
+        const goalStreak = document.createElement('span');
+        goalStreak.className = 'goal-streak';
+        goalStreak.textContent = '🔥 0 day streak';
+        
+        const goalStatus = document.createElement('span');
+        goalStatus.className = 'goal-status status-active';
+        goalStatus.textContent = 'Starting';
+        
+        // Build goal footer
+        goalFooter.appendChild(goalStreak);
+        goalFooter.appendChild(goalStatus);
+        
+        // Build goal card
+        goalCard.appendChild(goalHeader);
+        goalCard.appendChild(goalDescriptionElem);
+        goalCard.appendChild(goalProgress);
+        goalCard.appendChild(goalFooter);
         
         // Insert at the beginning (after h3)
         const h3 = goalsSection.querySelector('h3');
-        h3.insertAdjacentHTML('afterend', goalHTML);
+        goalsSection.insertBefore(goalCard, h3.nextSibling);
         
-        // Add event listeners to the new buttons
-        const newGoalCard = h3.nextElementSibling;
-        setupGoalCardEventListeners(newGoalCard);
+        // Add event listeners directly to the buttons
+        deleteBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete this goal?')) {
+                goalCard.remove();
+                alert('Goal deleted successfully!');
+            }
+        });
+        
+        editBtn.addEventListener('click', function() {
+            editGoal(goalCard);
+        });
+        
+        completeBtn.addEventListener('click', function() {
+            completeGoal(goalCard);
+        });
     }
     
     // Update existing goal card
     function updateGoalCard(goalCard, name, category, description, limit) {
-        // Get category class
-        let categoryClass = 'other';
-        if (category === 'Social Media') categoryClass = 'social-media';
-        else if (category === 'Work' || category === 'Work-related') categoryClass = 'work';
-        else if (category === 'Gaming') categoryClass = 'gaming';
-        else if (category === 'Movies' || category === 'Movies & Entertainment') categoryClass = 'movies';
-        else if (category === 'Study' || category === 'Study & Learning') categoryClass = 'study';
-        
+        const categoryClass = getCategoryClass(category);
         const displayDescription = description.trim() || 'No description provided';
         
         // Update title and category
@@ -446,8 +542,157 @@ document.addEventListener('DOMContentLoaded', function() {
         goalModal.classList.add('active');
     }
     
-    // Setup event listeners for a goal card
-    function setupGoalCardEventListeners(goalCard) {
+    // Complete goal function
+    function completeGoal(goalCard) {
+        if (confirm('Mark this goal as completed?')) {
+            // Add completed class
+            goalCard.classList.add('completed');
+            
+            // Remove progress section
+            const progressSection = goalCard.querySelector('.goal-progress');
+            if (progressSection) {
+                progressSection.remove();
+            }
+            
+            // Change buttons to reactivate only
+            const goalActions = goalCard.querySelector('.goal-actions');
+            goalActions.innerHTML = '';
+            
+            const reactivateBtn = document.createElement('button');
+            reactivateBtn.className = 'btn-icon reactivate-goal';
+            reactivateBtn.title = 'Reactivate Goal';
+            reactivateBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></svg>';
+            
+            goalActions.appendChild(reactivateBtn);
+            
+            // Update status and streak
+            const statusElement = goalCard.querySelector('.goal-status');
+            statusElement.textContent = 'Completed';
+            statusElement.className = 'goal-status status-completed';
+            
+            const streakElement = goalCard.querySelector('.goal-streak');
+            streakElement.textContent = '✓ Completed on ' + getTodayDate();
+            
+            // Move to completed goals section
+            const goalsSections = document.querySelectorAll('.goals-section');
+            const completedGoalsSection = goalsSections[1];
+            
+            goalCard.remove();
+            completedGoalsSection.appendChild(goalCard);
+            
+            // Add event listener to reactivate button
+            reactivateBtn.addEventListener('click', function() {
+                reactivateGoal(goalCard);
+            });
+            
+            alert('Goal marked as completed!');
+        }
+    }
+    
+    // Reactivate goal function
+    function reactivateGoal(goalCard) {
+        if (confirm('Move this goal back to active goals?')) {
+            // Remove completed class
+            goalCard.classList.remove('completed');
+            
+            // Change buttons back to complete/edit/delete
+            const goalActions = goalCard.querySelector('.goal-actions');
+            goalActions.innerHTML = '';
+            
+            const completeBtn = document.createElement('button');
+            completeBtn.className = 'btn-icon complete-goal';
+            completeBtn.title = 'Mark as Completed';
+            completeBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>';
+            
+            const editBtn = document.createElement('button');
+            editBtn.className = 'btn-icon edit-goal';
+            editBtn.title = 'Edit';
+            editBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>';
+            
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'btn-icon delete-goal';
+            deleteBtn.title = 'Delete';
+            deleteBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>';
+            
+            goalActions.appendChild(completeBtn);
+            goalActions.appendChild(editBtn);
+            goalActions.appendChild(deleteBtn);
+            
+            // Add basic progress section if it doesn't exist
+            if (!goalCard.querySelector('.goal-progress')) {
+                const goalDescription = goalCard.querySelector('.goal-description');
+                const goalFooter = goalCard.querySelector('.goal-footer');
+                
+                const goalProgress = document.createElement('div');
+                goalProgress.className = 'goal-progress';
+                
+                const progressInfo = document.createElement('div');
+                progressInfo.className = 'progress-info';
+                
+                const progressText = document.createElement('span');
+                progressText.textContent = 'Today: 0h 00m / 2h 00m';
+                
+                const progressPercentage = document.createElement('span');
+                progressPercentage.className = 'progress-percentage';
+                progressPercentage.textContent = '0%';
+                
+                progressInfo.appendChild(progressText);
+                progressInfo.appendChild(progressPercentage);
+                
+                const progressBar = document.createElement('div');
+                progressBar.className = 'progress-bar';
+                
+                const progressFill = document.createElement('div');
+                progressFill.className = 'progress-fill';
+                progressFill.style.width = '0%';
+                
+                progressBar.appendChild(progressFill);
+                goalProgress.appendChild(progressInfo);
+                goalProgress.appendChild(progressBar);
+                
+                goalDescription.parentNode.insertBefore(goalProgress, goalFooter);
+            }
+            
+            // Update status
+            const statusElement = goalCard.querySelector('.goal-status');
+            statusElement.textContent = 'Starting';
+            statusElement.className = 'goal-status status-active';
+            
+            // Update streak
+            const streakElement = goalCard.querySelector('.goal-streak');
+            streakElement.textContent = '🔥 0 day streak';
+            
+            // Move to active goals section
+            const goalsSections = document.querySelectorAll('.goals-section');
+            const activeGoalsSection = goalsSections[0];
+            
+            goalCard.remove();
+            const h3 = activeGoalsSection.querySelector('h3');
+            activeGoalsSection.insertBefore(goalCard, h3.nextSibling);
+            
+            // Add event listeners to the new buttons
+            deleteBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to delete this goal?')) {
+                    goalCard.remove();
+                    alert('Goal deleted successfully!');
+                }
+            });
+            
+            editBtn.addEventListener('click', function() {
+                editGoal(goalCard);
+            });
+            
+            completeBtn.addEventListener('click', function() {
+                completeGoal(goalCard);
+            });
+            
+            alert('Goal moved to active goals!');
+        }
+    }
+    
+    // Initialize existing goal cards
+    const goalCards = document.querySelectorAll('.goal-card');
+    goalCards.forEach(function(goalCard) {
         const deleteBtn = goalCard.querySelector('.delete-goal');
         const editBtn = goalCard.querySelector('.edit-goal');
         const completeBtn = goalCard.querySelector('.complete-goal');
@@ -479,139 +724,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 reactivateGoal(goalCard);
             });
         }
-    }
-    
-    // Complete goal function
-    function completeGoal(goalCard) {
-        if (confirm('Mark this goal as completed?')) {
-            // Add completed class
-            goalCard.classList.add('completed');
-            
-            // Remove progress section
-            const progressSection = goalCard.querySelector('.goal-progress');
-            if (progressSection) {
-                progressSection.remove();
-            }
-            
-            // Change buttons to reactivate only
-            const goalActions = goalCard.querySelector('.goal-actions');
-            goalActions.innerHTML = `
-                <button class="btn-icon reactivate-goal" title="Reactivate Goal">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 7v6h6"></path>
-                        <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path>
-                    </svg>
-                </button>
-            `;
-            
-            // Update status and streak
-            const statusElement = goalCard.querySelector('.goal-status');
-            statusElement.textContent = 'Completed';
-            statusElement.className = 'goal-status status-completed';
-            
-            const streakElement = goalCard.querySelector('.goal-streak');
-            streakElement.textContent = '✓ Completed on ' + getTodayDate();
-            
-            // Move to completed goals section
-            const completedGoalsSection = document.querySelectorAll('.goals-section')[1];
-            const completedGoalsList = completedGoalsSection.querySelector('.goal-card:last-child');
-            
-            if (completedGoalsList) {
-                completedGoalsList.after(goalCard);
-            } else {
-                completedGoalsSection.appendChild(goalCard);
-            }
-            
-            // Re-attach event listeners
-            setupGoalCardEventListeners(goalCard);
-            
-            alert('Goal marked as completed!');
-        }
-    }
-    
-        // Reactivate goal function
-    function reactivateGoal(goalCard) {
-        if (confirm('Move this goal back to active goals?')) {
-            // Remove completed class
-            goalCard.classList.remove('completed');
-            
-            // Change buttons back to complete/edit/delete
-            const goalActions = goalCard.querySelector('.goal-actions');
-            goalActions.innerHTML = `
-                <button class="btn-icon complete-goal" title="Mark as Completed">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 11 12 14 22 4"></polyline>
-                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                    </svg>
-                </button>
-                <button class="btn-icon edit-goal" title="Edit">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                    </svg>
-                </button>
-                <button class="btn-icon delete-goal" title="Delete">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="3 6 5 6 21 6"></polyline>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                    </svg>
-                </button>
-            `;
-            
-            // Add basic progress section
-            const goalDescription = goalCard.querySelector('.goal-description');
-            const goalFooter = goalCard.querySelector('.goal-footer');
-            
-            // Check if progress section already exists
-            if (!goalCard.querySelector('.goal-progress')) {
-                const progressHTML = `
-                    <div class="goal-progress">
-                        <div class="progress-info">
-                            <span>Today: 0h 00m / 2h 00m</span>
-                            <span class="progress-percentage">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
-                    </div>
-                `;
-                
-                // Insert progress after description and before footer
-                goalDescription.insertAdjacentHTML('afterend', progressHTML);
-            }
-            
-            // Update status
-            const statusElement = goalCard.querySelector('.goal-status');
-            statusElement.textContent = 'Starting';
-            statusElement.className = 'goal-status status-active';
-            
-            // Update streak
-            const streakElement = goalCard.querySelector('.goal-streak');
-            streakElement.textContent = '🔥 0 day streak';
-            
-            // Move to active goals section - FIXED SELECTION
-            const goalsSections = document.querySelectorAll('.goals-section');
-            const activeGoalsSection = goalsSections[0]; // First section is active goals
-            
-            // Remove from current parent
-            goalCard.remove();
-            
-            // Add to active goals section (after the h3)
-            const activeH3 = activeGoalsSection.querySelector('h3');
-            activeH3.insertAdjacentHTML('afterend', goalCard.outerHTML);
-            
-            // Get the newly added card and set up event listeners
-            const newGoalCard = activeH3.nextElementSibling;
-            setupGoalCardEventListeners(newGoalCard);
-            
-            alert('Goal moved to active goals!');
-        }
-    }
-    
-    // Initialize existing goal cards
-    const goalCards = document.querySelectorAll('.goal-card');
-    goalCards.forEach(function(goalCard) {
-        setupGoalCardEventListeners(goalCard);
     });
     
     // Goal search
@@ -674,7 +786,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Add mood to history
+    // Add mood to history using DOM manipulation
     function addMoodToHistory(emoji, label, note) {
         const moodHistory = document.querySelector('.mood-history');
         if (!moodHistory) return;
@@ -682,39 +794,90 @@ document.addEventListener('DOMContentLoaded', function() {
         const date = getTodayDate();
         const noteText = note || 'No note added.';
         
-        const moodHTML = `
-            <div class="mood-entry">
-                <div class="mood-entry-header">
-                    <div class="mood-info">
-                        <div class="mood-emoji-large">${emoji}</div>
-                        <div class="mood-details">
-                            <span class="mood-label">${label}</span>
-                            <span class="mood-date">${date}</span>
-                        </div>
-                    </div>
-                    <div class="mood-actions">
-                        <button class="btn-icon delete-mood" title="Delete">
-                            <span class="icon-delete"></span>
-                        </button>
-                    </div>
-                </div>
-                <div class="mood-note">${noteText}</div>
-                <div class="mood-stats">
-                    <span class="stat-item">📱 0h 0m total screen time today</span>
-                    <span class="stat-item">✓ New entry</span>
-                </div>
-            </div>
-        `;
+        // Create mood entry
+        const moodEntry = document.createElement('div');
+        moodEntry.className = 'mood-entry';
+        
+        // Create mood entry header
+        const moodEntryHeader = document.createElement('div');
+        moodEntryHeader.className = 'mood-entry-header';
+        
+        const moodInfo = document.createElement('div');
+        moodInfo.className = 'mood-info';
+        
+        const moodEmojiLarge = document.createElement('div');
+        moodEmojiLarge.className = 'mood-emoji-large';
+        moodEmojiLarge.textContent = emoji;
+        
+        const moodDetails = document.createElement('div');
+        moodDetails.className = 'mood-details';
+        
+        const moodLabel = document.createElement('span');
+        moodLabel.className = 'mood-label';
+        moodLabel.textContent = label;
+        
+        const moodDate = document.createElement('span');
+        moodDate.className = 'mood-date';
+        moodDate.textContent = date;
+        
+        // Build mood details
+        moodDetails.appendChild(moodLabel);
+        moodDetails.appendChild(moodDate);
+        
+        // Build mood info
+        moodInfo.appendChild(moodEmojiLarge);
+        moodInfo.appendChild(moodDetails);
+        
+        // Create mood actions
+        const moodActions = document.createElement('div');
+        moodActions.className = 'mood-actions';
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'btn-icon delete-mood';
+        deleteBtn.title = 'Delete';
+        deleteBtn.innerHTML = '<span class="icon-delete"></span>';
+        
+        // Build mood actions
+        moodActions.appendChild(deleteBtn);
+        
+        // Build mood entry header
+        moodEntryHeader.appendChild(moodInfo);
+        moodEntryHeader.appendChild(moodActions);
+        
+        // Create mood note
+        const moodNote = document.createElement('div');
+        moodNote.className = 'mood-note';
+        moodNote.textContent = noteText;
+        
+        // Create mood stats
+        const moodStats = document.createElement('div');
+        moodStats.className = 'mood-stats';
+        
+        const statItem1 = document.createElement('span');
+        statItem1.className = 'stat-item';
+        statItem1.textContent = '📱 0h 0m total screen time today';
+        
+        const statItem2 = document.createElement('span');
+        statItem2.className = 'stat-item';
+        statItem2.textContent = '✓ New entry';
+        
+        // Build mood stats
+        moodStats.appendChild(statItem1);
+        moodStats.appendChild(statItem2);
+        
+        // Build mood entry
+        moodEntry.appendChild(moodEntryHeader);
+        moodEntry.appendChild(moodNote);
+        moodEntry.appendChild(moodStats);
         
         // Insert at the beginning (after h3)
         const h3 = moodHistory.querySelector('h3');
-        h3.insertAdjacentHTML('afterend', moodHTML);
+        moodHistory.insertBefore(moodEntry, h3.nextSibling);
         
-        // Add delete functionality to the new button
-        const newDeleteBtn = h3.nextElementSibling.querySelector('.delete-mood');
-        newDeleteBtn.addEventListener('click', function() {
+        // Add delete functionality
+        deleteBtn.addEventListener('click', function() {
             if (confirm('Are you sure you want to delete this mood entry?')) {
-                this.closest('.mood-entry').remove();
+                moodEntry.remove();
                 alert('Mood entry deleted successfully!');
             }
         });
