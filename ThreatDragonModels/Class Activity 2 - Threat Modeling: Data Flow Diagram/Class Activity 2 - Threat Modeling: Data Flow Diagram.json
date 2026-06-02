@@ -234,13 +234,6 @@
               "hasOpenThreats": false,
               "providesAuthentication": false,
               "threats": []
-            },
-            "tools": {
-              "items": [
-                "boundary",
-                "button-remove"
-              ],
-              "name": null
             }
           },
           {
@@ -412,58 +405,6 @@
               {
                 "x": 300,
                 "y": 310
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Feedback Status",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
-            },
-            "labels": [
-              "Feedback Status"
-            ],
-            "id": "0fd90492-4a8c-4d3c-b178-0fa857548ed4",
-            "source": {
-              "x": 410,
-              "y": 380
-            },
-            "target": {
-              "cell": "a19dcdc9-4f1b-4f45-a21d-e9b20c62f1b9",
-              "port": "26ed3811-9536-4f90-8955-b9f713c462b5"
-            },
-            "vertices": [
-              {
-                "x": 290,
-                "y": 350
               }
             ]
           },
@@ -762,6 +703,58 @@
               {
                 "x": 620,
                 "y": 130
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Feedback Status",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Feedback Status"
+            ],
+            "id": "0fd90492-4a8c-4d3c-b178-0fa857548ed4",
+            "source": {
+              "x": 410,
+              "y": 380
+            },
+            "target": {
+              "cell": "a19dcdc9-4f1b-4f45-a21d-e9b20c62f1b9",
+              "port": "26ed3811-9536-4f90-8955-b9f713c462b5"
+            },
+            "vertices": [
+              {
+                "x": 290,
+                "y": 350
               }
             ]
           },
