@@ -571,6 +571,62 @@
             }
           },
           {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Data Flow",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              "Data Flow"
+            ],
+            "id": "ae0e56ce-bd5e-4e92-9f43-2dde52a9f9a8",
+            "source": {
+              "x": 470,
+              "y": 140
+            },
+            "target": {
+              "cell": "a1fda679-74e6-4b76-b185-faa3f0ed6c6d",
+              "port": "56230102-a16a-4e01-9b4c-7ad8f8983c0f"
+            },
+            "vertices": [
+              {
+                "x": 420,
+                "y": 200
+              },
+              {
+                "x": 420,
+                "y": 220
+              }
+            ]
+          },
+          {
             "position": {
               "x": 705,
               "y": 300
@@ -743,7 +799,7 @@
           {
             "position": {
               "x": 416.99999999999994,
-              "y": 90.00000000000011
+              "y": 40.000000000000114
             },
             "size": {
               "width": 110,
@@ -761,6 +817,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 13,
             "ports": {
               "groups": {
                 "top": {
@@ -844,7 +901,6 @@
               ]
             },
             "id": "1c1f8904-fd43-4057-8470-b4c221454cc5",
-            "zIndex": 13,
             "data": {
               "type": "tm.Process",
               "name": "Authorization",
@@ -863,7 +919,7 @@
           {
             "position": {
               "x": 705,
-              "y": 110
+              "y": 60.000000000000114
             },
             "size": {
               "width": 120,
@@ -884,6 +940,7 @@
             },
             "visible": true,
             "shape": "store",
+            "zIndex": 14,
             "ports": {
               "groups": {
                 "top": {
@@ -967,7 +1024,6 @@
               ]
             },
             "id": "dc21e226-6c2a-4a0f-b533-e409df1beb3d",
-            "zIndex": 14,
             "data": {
               "type": "tm.Store",
               "name": "LDAP",
@@ -1004,7 +1060,7 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Data Flow",
+              "name": "Verification Request",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
@@ -1018,7 +1074,7 @@
               "trustBoundaryIds": []
             },
             "labels": [
-              "Data Flow"
+              "Verification Request"
             ],
             "id": "c5c3e3e2-7dff-4aeb-9542-4506466ffa0b",
             "source": {
@@ -1027,12 +1083,12 @@
             },
             "target": {
               "cell": "1c1f8904-fd43-4057-8470-b4c221454cc5",
-              "port": "b987eaff-6602-44e2-a412-b620204fc463"
+              "port": "925156da-6335-4312-9218-cc759a78a59c"
             },
             "vertices": [
               {
-                "x": 527,
-                "y": 190
+                "x": 530,
+                "y": 200
               }
             ]
           }
